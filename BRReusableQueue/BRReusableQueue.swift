@@ -9,16 +9,16 @@
 import Foundation
 import UIKit
 
-@objc protocol Reusable: class {
+@objc public protocol Reusable: class {
     optional static func reuseIdentifier() -> String // if not implemented, classname is used
     optional static func newForReuse() -> AnyObject? // if implemented, dequeueOrCreateReusableWithClass can be used
     optional func prepareForReuse() -> Void
 }
 
-@objc class ReusableQueue : NSObject {
+@objc public class ReusableQueue : NSObject {
     var reusables: NSCache = NSCache();
     
-    static let sharedQueue = ReusableQueue()
+    public static let sharedQueue = ReusableQueue()
     
     override init () {
         super.init()
@@ -29,7 +29,7 @@ import UIKit
             object: nil)
     }
     
-    func enqueueReusable(reusable: Reusable) -> Void {
+    public func enqueueReusable(reusable: Reusable) -> Void {
         let identifier = identifierFromReusableClass(reusable.dynamicType)
         var objects: Array<Reusable> = reusables.objectForKey(identifier) as? Array<Reusable> ??  Array<Reusable>()
         reusable.prepareForReuse?()
@@ -37,7 +37,7 @@ import UIKit
         reusables.setObject(objects, forKey: identifier)
     }
     
-    func dequeueReusableWithIdentifier(identifier: String) -> Reusable? {
+    public func dequeueReusableWithIdentifier(identifier: String) -> Reusable? {
         if var objects: Array<Reusable> = reusables.objectForKey(identifier) as? Array<Reusable> where
             objects.count > 0{
             let reusable = objects.removeFirst()
@@ -47,11 +47,11 @@ import UIKit
         return nil
     }
     
-    func dequeueReusableWithClass(reusableClass: Reusable.Type) -> Reusable? {
+    public func dequeueReusableWithClass(reusableClass: Reusable.Type) -> Reusable? {
         return dequeueReusableWithIdentifier(identifierFromReusableClass(reusableClass))
     }
     
-    func dequeueOrCreateReusableWithClass(reusableClass: Reusable.Type) -> Reusable? {
+    public func dequeueOrCreateReusableWithClass(reusableClass: Reusable.Type) -> Reusable? {
         if let reusable = dequeueReusableWithClass(reusableClass) {
             return reusable
         }
@@ -62,7 +62,7 @@ import UIKit
         return nil
     }
     
-    func emptyQueue() -> Void {
+    public func emptyQueue() -> Void {
         reusables.removeAllObjects()
     }
     
