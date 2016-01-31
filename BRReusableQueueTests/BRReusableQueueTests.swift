@@ -9,28 +9,82 @@
 import XCTest
 @testable import BRReusableQueue
 
+class DefaultTestReusable : NSObject, Reusable {
+    var count = 0
+    
+    @objc func prepareForReuse() {
+        count += 1
+    }
+}
+
+class CreateableTestReusable : DefaultTestReusable {
+    static func newForReuse() -> AnyObject? {
+        return CreateableTestReusable()
+    }
+}
+
+class CustomIdentifierTestReusable : DefaultTestReusable {
+    static func reuseIdentifier() -> String {
+        return "CustomIdentifier"
+    }
+}
+
 class BRReusableQueueTests: XCTestCase {
+    
+    let reusableQueue = ReusableQueue()
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        reusableQueue.emptyQueue()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testDequeueReusableWithClass() {
+        let reusable = DefaultTestReusable()
+        reusableQueue.enqueueReusable(reusable);
+        let reused = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        XCTAssertEqual(reusable, reused as? DefaultTestReusable)
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testDequeueReusableWithIdentifier() {
+        let reusable = CustomIdentifierTestReusable()
+        reusableQueue.enqueueReusable(reusable);
+        let reused = reusableQueue.dequeueReusableWithIdentifier(CustomIdentifierTestReusable.reuseIdentifier())
+        XCTAssertEqual(reusable, reused as? CustomIdentifierTestReusable)
+    }
+    
+    func testDequeueCreateReusable() {
+        let created = reusableQueue.dequeueOrCreateReusableWithClass(CreateableTestReusable)
+        XCTAssertNotNil(created)
+    }
+    
+    func testPrepareForReuse() {
+        let reusable = DefaultTestReusable()
+        let oldCount = reusable.count
+        reusableQueue.enqueueReusable(reusable);
+        let reused = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        XCTAssertEqual(reusable, reused as? DefaultTestReusable)
+        XCTAssertNotEqual(oldCount, (reused as! DefaultTestReusable).count)
+    }
+    
+    func testDequeueMoreThanThereIs() {
+        let reusable = DefaultTestReusable()
+        reusableQueue.enqueueReusable(reusable);
+        let reused = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        let nonexisting = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        XCTAssertEqual(reusable, reused as? DefaultTestReusable)
+        XCTAssertNil(nonexisting)
+    }
+    
+    func testEmptyingQueue() {
+        let reusable = DefaultTestReusable()
+        reusableQueue.enqueueReusable(reusable);
+        reusableQueue.emptyQueue()
+        let nonexisting = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        XCTAssertNil(nonexisting)
     }
     
 }

@@ -13,6 +13,9 @@
 		1F90134C1C5CC3FB0066DA65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F90134B1C5CC3FB0066DA65 /* Assets.xcassets */; };
 		1F90134F1C5CC3FB0066DA65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F90134D1C5CC3FB0066DA65 /* LaunchScreen.storyboard */; };
 		1F90135A1C5CC3FB0066DA65 /* BRReusableQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013591C5CC3FB0066DA65 /* BRReusableQueueTests.swift */; };
+		1F9013671C5CC4460066DA65 /* BRReusableQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013661C5CC4460066DA65 /* BRReusableQueue.swift */; };
+		1F9013691C5CCF0E0066DA65 /* ReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013681C5CCF0E0066DA65 /* ReusableViewController.swift */; };
+		1F90136B1C5CD1E50066DA65 /* ReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F90136A1C5CD1E50066DA65 /* ReusableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		1F9013551C5CC3FB0066DA65 /* BRReusableQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRReusableQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F9013591C5CC3FB0066DA65 /* BRReusableQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRReusableQueueTests.swift; sourceTree = "<group>"; };
 		1F90135B1C5CC3FB0066DA65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F9013661C5CC4460066DA65 /* BRReusableQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRReusableQueue.swift; sourceTree = "<group>"; };
+		1F9013681C5CCF0E0066DA65 /* ReusableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableViewController.swift; sourceTree = "<group>"; };
+		1F90136A1C5CD1E50066DA65 /* ReusableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReusableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 		1F9013381C5CC3FB0066DA65 = {
 			isa = PBXGroup;
 			children = (
+				1F9013651C5CC4120066DA65 /* Demo */,
 				1F9013431C5CC3FB0066DA65 /* BRReusableQueue */,
 				1F9013581C5CC3FB0066DA65 /* BRReusableQueueTests */,
 				1F9013421C5CC3FB0066DA65 /* Products */,
@@ -77,12 +84,7 @@
 		1F9013431C5CC3FB0066DA65 /* BRReusableQueue */ = {
 			isa = PBXGroup;
 			children = (
-				1F9013441C5CC3FB0066DA65 /* AppDelegate.swift */,
-				1F9013461C5CC3FB0066DA65 /* ViewController.swift */,
-				1F9013481C5CC3FB0066DA65 /* Main.storyboard */,
-				1F90134B1C5CC3FB0066DA65 /* Assets.xcassets */,
-				1F90134D1C5CC3FB0066DA65 /* LaunchScreen.storyboard */,
-				1F9013501C5CC3FB0066DA65 /* Info.plist */,
+				1F9013661C5CC4460066DA65 /* BRReusableQueue.swift */,
 			);
 			path = BRReusableQueue;
 			sourceTree = "<group>";
@@ -94,6 +96,21 @@
 				1F90135B1C5CC3FB0066DA65 /* Info.plist */,
 			);
 			path = BRReusableQueueTests;
+			sourceTree = "<group>";
+		};
+		1F9013651C5CC4120066DA65 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				1F9013441C5CC3FB0066DA65 /* AppDelegate.swift */,
+				1F90134B1C5CC3FB0066DA65 /* Assets.xcassets */,
+				1F9013501C5CC3FB0066DA65 /* Info.plist */,
+				1F90134D1C5CC3FB0066DA65 /* LaunchScreen.storyboard */,
+				1F9013481C5CC3FB0066DA65 /* Main.storyboard */,
+				1F9013461C5CC3FB0066DA65 /* ViewController.swift */,
+				1F9013681C5CCF0E0066DA65 /* ReusableViewController.swift */,
+				1F90136A1C5CD1E50066DA65 /* ReusableViewController.xib */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F90134F1C5CC3FB0066DA65 /* LaunchScreen.storyboard in Resources */,
+				1F90136B1C5CD1E50066DA65 /* ReusableViewController.xib in Resources */,
 				1F90134C1C5CC3FB0066DA65 /* Assets.xcassets in Resources */,
 				1F90134A1C5CC3FB0066DA65 /* Main.storyboard in Resources */,
 			);
@@ -198,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F9013471C5CC3FB0066DA65 /* ViewController.swift in Sources */,
+				1F9013691C5CCF0E0066DA65 /* ReusableViewController.swift in Sources */,
+				1F9013671C5CC4460066DA65 /* BRReusableQueue.swift in Sources */,
 				1F9013451C5CC3FB0066DA65 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +247,7 @@
 				1F9013491C5CC3FB0066DA65 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		1F90134D1C5CC3FB0066DA65 /* LaunchScreen.storyboard */ = {
@@ -235,6 +256,7 @@
 				1F90134E1C5CC3FB0066DA65 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -327,7 +349,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = BRReusableQueue/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.brototyp.BRReusableQueue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -338,7 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = BRReusableQueue/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.brototyp.BRReusableQueue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -388,6 +410,7 @@
 				1F9013601C5CC3FB0066DA65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F9013611C5CC3FB0066DA65 /* Build configuration list for PBXNativeTarget "BRReusableQueueTests" */ = {
 			isa = XCConfigurationList;
@@ -396,6 +419,7 @@
 				1F9013631C5CC3FB0066DA65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
