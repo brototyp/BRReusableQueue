@@ -7,14 +7,14 @@ ReuseableQueue is a simple, private api free queue you can use to reuse every ob
 ### install via [CocoaPods](http://cocoapods.org/)
 The best way to install BRReuseableQueue is via Cocoapods.
 
-```
+```ruby
 pod 'BRReuseQueue'
 use_frameworks!
 ```
 
 ### Swift Usage
 
-```
+```swift
 // Import BRReusableQueue
 import BRReusableQueue
 
@@ -31,7 +31,7 @@ reusableQueue.dequeueReusableWithClass(ReusableClass)
 
 ### Objective-C Usage
 
-```
+```objc
 // Import BRReusableQueue
 @import BRReusableQueue;
 
@@ -54,7 +54,7 @@ All objects stored in a ReusableQueue must implement the `Reusable` protocol. Al
 
 Per default the reuseIdentifier is the class name of an object. You can change that behavior by implementing the `reuseIdentifier`.
 
-```
+```swift
 optional static func reuseIdentifier() -> String
 ```
 
@@ -64,7 +64,7 @@ Per default you can only use the `dequeueReusableWithIdentifier` and `dequeueReu
 
 The `dequeueOrCreateReusableWithClass` will dequeue an object and create a new one if none was found.
 
-```
+```swift
 optional static func newForReuse() -> AnyObject?
 ```
 
@@ -72,6 +72,6 @@ optional static func newForReuse() -> AnyObject?
 
 Every object that gets enqueued in the reusableQueue is called the `prepareForReuse` method. Use it to reset it to a default state and get rid of everything you don't need.
 
-```
+```swift
 optional func prepareForReuse() -> Void
 ```
