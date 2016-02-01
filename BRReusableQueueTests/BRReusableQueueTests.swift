@@ -44,14 +44,14 @@ class BRReusableQueueTests: XCTestCase {
     
     func testDequeueReusableWithClass() {
         let reusable = DefaultTestReusable()
-        reusableQueue.enqueueReusable(reusable);
+        reusableQueue.enqueueReusable(reusable)
         let reused = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
         XCTAssertEqual(reusable, reused as? DefaultTestReusable)
     }
     
     func testDequeueReusableWithIdentifier() {
         let reusable = CustomIdentifierTestReusable()
-        reusableQueue.enqueueReusable(reusable);
+        reusableQueue.enqueueReusable(reusable)
         let reused = reusableQueue.dequeueReusableWithIdentifier(CustomIdentifierTestReusable.reuseIdentifier())
         XCTAssertEqual(reusable, reused as? CustomIdentifierTestReusable)
     }
@@ -64,7 +64,7 @@ class BRReusableQueueTests: XCTestCase {
     func testPrepareForReuse() {
         let reusable = DefaultTestReusable()
         let oldCount = reusable.count
-        reusableQueue.enqueueReusable(reusable);
+        reusableQueue.enqueueReusable(reusable)
         let reused = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
         XCTAssertEqual(reusable, reused as? DefaultTestReusable)
         XCTAssertNotEqual(oldCount, (reused as! DefaultTestReusable).count)
@@ -72,7 +72,7 @@ class BRReusableQueueTests: XCTestCase {
     
     func testDequeueMoreThanThereIs() {
         let reusable = DefaultTestReusable()
-        reusableQueue.enqueueReusable(reusable);
+        reusableQueue.enqueueReusable(reusable)
         let reused = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
         let nonexisting = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
         XCTAssertEqual(reusable, reused as? DefaultTestReusable)
@@ -81,10 +81,37 @@ class BRReusableQueueTests: XCTestCase {
     
     func testEmptyingQueue() {
         let reusable = DefaultTestReusable()
-        reusableQueue.enqueueReusable(reusable);
+        reusableQueue.enqueueReusable(reusable)
         reusableQueue.emptyQueue()
         let nonexisting = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
         XCTAssertNil(nonexisting)
+    }
+    
+    func testAutomaticEmptyingQueue() {
+        let reusable = DefaultTestReusable()
+        reusableQueue.enqueueReusable(reusable)
+        reusableQueue.emptyOnMemoryWarningNotification = true
+        NSNotificationCenter.defaultCenter().postNotificationName(UIApplicationDidReceiveMemoryWarningNotification, object: nil)
+        let nonexisting = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        XCTAssertNil(nonexisting)
+    }
+    
+    func testNonAutomaticEmptyingQueue() {
+        let reusable = DefaultTestReusable()
+        reusableQueue.enqueueReusable(reusable)
+        reusableQueue.emptyOnMemoryWarningNotification = false
+        NSNotificationCenter.defaultCenter().postNotificationName(UIApplicationDidReceiveMemoryWarningNotification, object: nil)
+        let existing = reusableQueue.dequeueReusableWithClass(DefaultTestReusable)
+        XCTAssertNotNil(existing)
+    }
+    
+    // this test does always succeed; is there a way to let it fail if the object is still registered
+    func testRemovingObserverOnDealloc() {
+        var deInitableReusableQueue : ReusableQueue? = ReusableQueue()
+        let reusable = DefaultTestReusable()
+        deInitableReusableQueue!.enqueueReusable(reusable)
+        deInitableReusableQueue = nil
+        NSNotificationCenter.defaultCenter().postNotificationName(UIApplicationDidReceiveMemoryWarningNotification, object: nil)
     }
     
 }

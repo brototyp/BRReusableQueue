@@ -16,15 +16,20 @@ import UIKit
 }
 
 @objc public class ReusableQueue : NSObject {
-    var reusables: NSCache = NSCache();
+    var reusables: NSCache = NSCache()
+    public var emptyOnMemoryWarningNotification = true
     
     public static let sharedQueue = ReusableQueue()
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     
     override init () {
         super.init()
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "emptyQueue:",
+            selector: "didReceiveMemoryWarning",
             name: UIApplicationDidReceiveMemoryWarningNotification,
             object: nil)
     }
@@ -39,7 +44,7 @@ import UIKit
     
     public func dequeueReusableWithIdentifier(identifier: String) -> Reusable? {
         if var objects: Array<Reusable> = reusables.objectForKey(identifier) as? Array<Reusable> where
-            objects.count > 0{
+            objects.count > 0 {
             let reusable = objects.removeFirst()
             reusables.setObject(objects, forKey: identifier)
             return reusable
@@ -64,6 +69,13 @@ import UIKit
     
     public func emptyQueue() -> Void {
         reusables.removeAllObjects()
+    }
+    
+    func didReceiveMemoryWarning() -> Void {
+        if !emptyOnMemoryWarningNotification {
+            return
+        }
+        emptyQueue()
     }
     
     private func identifierFromReusableClass(reusable: Reusable.Type) -> String {
