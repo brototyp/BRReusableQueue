@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReusableViewController: UIViewController, Reusable {
+class ReusableViewController: UIViewController, BRReusable {
     
     func prepareForReuse() {
         self.view.backgroundColor = randomColor()
@@ -27,7 +27,7 @@ class ReusableViewController: UIViewController, Reusable {
     
     override func didMoveToParentViewController(parent: UIViewController?) {
         if parent == nil {
-            ReusableQueue.sharedQueue.enqueueReusable(self)
+            BRReusableQueue.sharedQueue.enqueueReusable(self)
         }
     }
     

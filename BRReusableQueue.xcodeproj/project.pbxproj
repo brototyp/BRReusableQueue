@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F2089B91C67453900264C43 /* BRReusableQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2089B81C67453900264C43 /* BRReusableQueue.m */; };
 		1F9013451C5CC3FB0066DA65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013441C5CC3FB0066DA65 /* AppDelegate.swift */; };
 		1F9013471C5CC3FB0066DA65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9013461C5CC3FB0066DA65 /* ViewController.swift */; };
 		1F90134A1C5CC3FB0066DA65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F9013481C5CC3FB0066DA65 /* Main.storyboard */; };
@@ -29,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F2089B61C67453900264C43 /* BRReusableQueue-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BRReusableQueue-Bridging-Header.h"; sourceTree = "<group>"; };
+		1F2089B71C67453900264C43 /* BRReusableQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRReusableQueue.h; sourceTree = "<group>"; };
+		1F2089B81C67453900264C43 /* BRReusableQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRReusableQueue.m; sourceTree = "<group>"; };
 		1F9013411C5CC3FB0066DA65 /* BRReusableQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRReusableQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F9013441C5CC3FB0066DA65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F9013461C5CC3FB0066DA65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				1F9013661C5CC4460066DA65 /* BRReusableQueue.swift */,
+				1F2089B71C67453900264C43 /* BRReusableQueue.h */,
+				1F2089B81C67453900264C43 /* BRReusableQueue.m */,
 			);
 			path = BRReusableQueue;
 			sourceTree = "<group>";
@@ -92,6 +98,7 @@
 		1F9013581C5CC3FB0066DA65 /* BRReusableQueueTests */ = {
 			isa = PBXGroup;
 			children = (
+				1F2089B61C67453900264C43 /* BRReusableQueue-Bridging-Header.h */,
 				1F9013591C5CC3FB0066DA65 /* BRReusableQueueTests.swift */,
 				1F90135B1C5CC3FB0066DA65 /* Info.plist */,
 			);
@@ -216,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F9013471C5CC3FB0066DA65 /* ViewController.swift in Sources */,
+				1F2089B91C67453900264C43 /* BRReusableQueue.m in Sources */,
 				1F9013691C5CCF0E0066DA65 /* ReusableViewController.swift in Sources */,
 				1F9013671C5CC4460066DA65 /* BRReusableQueue.swift in Sources */,
 				1F9013451C5CC3FB0066DA65 /* AppDelegate.swift in Sources */,
@@ -349,10 +357,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.brototyp.BRReusableQueue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -360,10 +371,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.brototyp.BRReusableQueue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -375,6 +388,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.brototyp.BRReusableQueueTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BRReusableQueueTests/BRReusableQueue-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BRReusableQueue.app/BRReusableQueue";
 			};
 			name = Debug;
@@ -387,6 +401,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.brototyp.BRReusableQueueTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BRReusableQueueTests/BRReusableQueue-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BRReusableQueue.app/BRReusableQueue";
 			};
 			name = Release;

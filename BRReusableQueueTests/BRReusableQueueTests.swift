@@ -7,9 +7,11 @@
 //
 
 import XCTest
+
+// commet this if you want to test the objc-code
 @testable import BRReusableQueue
 
-class DefaultTestReusable : NSObject, Reusable {
+class DefaultTestReusable : NSObject, BRReusable {
     var count = 0
     
     @objc func prepareForReuse() {
@@ -31,7 +33,7 @@ class CustomIdentifierTestReusable : DefaultTestReusable {
 
 class BRReusableQueueTests: XCTestCase {
     
-    let reusableQueue = ReusableQueue()
+    let reusableQueue = BRReusableQueue()
     
     override func setUp() {
         super.setUp()
@@ -107,7 +109,7 @@ class BRReusableQueueTests: XCTestCase {
     
     // this test does always succeed; is there a way to let it fail if the object is still registered
     func testRemovingObserverOnDealloc() {
-        var deInitableReusableQueue : ReusableQueue? = ReusableQueue()
+        var deInitableReusableQueue : BRReusableQueue? = BRReusableQueue()
         let reusable = DefaultTestReusable()
         deInitableReusableQueue!.enqueueReusable(reusable)
         deInitableReusableQueue = nil

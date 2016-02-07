@@ -27,14 +27,14 @@ class ViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        if let viewController = ReusableQueue.sharedQueue.dequeueOrCreateReusableWithClass(ReusableViewController) as? ReusableViewController {
+        if let viewController = BRReusableQueue.sharedQueue.dequeueOrCreateReusableWithClass(ReusableViewController) as? ReusableViewController {
             return viewController
         }
         return nil
     }
 
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        if let viewController = ReusableQueue.sharedQueue.dequeueOrCreateReusableWithClass(ReusableViewController) as? ReusableViewController {
+        if let viewController = BRReusableQueue.sharedQueue.dequeueOrCreateReusableWithClass(ReusableViewController) as? ReusableViewController {
             return viewController
         }
         return nil

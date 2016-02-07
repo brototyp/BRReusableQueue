@@ -9,17 +9,17 @@
 import Foundation
 import UIKit
 
-@objc public protocol Reusable: class {
+@objc public protocol BRReusable: class {
     optional static func reuseIdentifier() -> String // if not implemented, classname is used
     optional static func newForReuse() -> AnyObject? // if implemented, dequeueOrCreateReusableWithClass can be used
     optional func prepareForReuse() -> Void
 }
 
-@objc public class ReusableQueue : NSObject {
+@objc public class BRReusableQueue : NSObject {
     var reusables: NSCache = NSCache()
     public var emptyOnMemoryWarningNotification = true
     
-    public static let sharedQueue = ReusableQueue()
+    public static let sharedQueue = BRReusableQueue()
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -34,16 +34,16 @@ import UIKit
             object: nil)
     }
     
-    public func enqueueReusable(reusable: Reusable) -> Void {
+    public func enqueueReusable(reusable: BRReusable) -> Void {
         let identifier = identifierFromReusableClass(reusable.dynamicType)
-        var objects: Array<Reusable> = reusables.objectForKey(identifier) as? Array<Reusable> ??  Array<Reusable>()
+        var objects: Array<BRReusable> = reusables.objectForKey(identifier) as? Array<BRReusable> ??  Array<BRReusable>()
         reusable.prepareForReuse?()
         objects.append(reusable)
         reusables.setObject(objects, forKey: identifier)
     }
     
-    public func dequeueReusableWithIdentifier(identifier: String) -> Reusable? {
-        if var objects: Array<Reusable> = reusables.objectForKey(identifier) as? Array<Reusable> where
+    public func dequeueReusableWithIdentifier(identifier: String) -> BRReusable? {
+        if var objects: Array<BRReusable> = reusables.objectForKey(identifier) as? Array<BRReusable> where
             objects.count > 0 {
             let reusable = objects.removeFirst()
             reusables.setObject(objects, forKey: identifier)
@@ -52,16 +52,16 @@ import UIKit
         return nil
     }
     
-    public func dequeueReusableWithClass(reusableClass: Reusable.Type) -> Reusable? {
+    public func dequeueReusableWithClass(reusableClass: BRReusable.Type) -> BRReusable? {
         return dequeueReusableWithIdentifier(identifierFromReusableClass(reusableClass))
     }
     
-    public func dequeueOrCreateReusableWithClass(reusableClass: Reusable.Type) -> Reusable? {
+    public func dequeueOrCreateReusableWithClass(reusableClass: BRReusable.Type) -> BRReusable? {
         if let reusable = dequeueReusableWithClass(reusableClass) {
             return reusable
         }
         let createdReusable = reusableClass.newForReuse?()
-        if let reusable = createdReusable as? Reusable {
+        if let reusable = createdReusable as? BRReusable {
             return reusable
         }
         return nil
@@ -78,7 +78,7 @@ import UIKit
         emptyQueue()
     }
     
-    private func identifierFromReusableClass(reusable: Reusable.Type) -> String {
+    private func identifierFromReusableClass(reusable: BRReusable.Type) -> String {
         if let identifier = reusable.reuseIdentifier?() {
             return identifier
         }
