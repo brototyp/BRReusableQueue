@@ -5,7 +5,7 @@ ReuseableQueue is a simple, private api free queue you can use to reuse every ob
 ## How to get startet
 
 ### install via [CocoaPods](http://cocoapods.org/)
-The best way to install BRReuseableQueue is via Cocoapods.
+The best way to install BRReuseableQueue is via CocoaPods.
 
 #### Swift
 ```ruby
