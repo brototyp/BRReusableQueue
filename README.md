@@ -9,13 +9,13 @@ The best way to install BRReuseableQueue is via CocoaPods.
 
 #### Swift
 ```ruby
-pod 'BRReuseQueue/Swift'
+pod 'BRReusableQueue/Swift'
 use_frameworks!
 ```
 
 #### Objc
 ```ruby
-pod 'BRReuseQueue/OBJC'
+pod 'BRReusableQueue/OBJC'
 ```
 
 ### Swift Usage
